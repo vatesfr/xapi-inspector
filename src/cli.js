@@ -34,6 +34,12 @@ const requiredArg = name => {
   throw message
 }
 
+const invalidArg = (name, value) => {
+  const message = `Invalid value ${chalk.bold(value)} for argument: <${paintArg(name)}>`
+
+  throw message
+}
+
 // ===================================================================
 
 const wrapAsync = asyncFn => async function () {
@@ -147,12 +153,12 @@ execPromise(async args => {
   const [ commandName, ...commandArgs ] = restArgs
 
   if (commandName === '--') {
-    throw new Error('missing <command>')
+    requiredArg('command')
   }
 
   const command = COMMANDS[commandName]
   if (!command) {
-    throw new Error(`invalid <command>: ${commandName}`)
+    invalidArg('command', commandName)
   }
 
   return command.call(
