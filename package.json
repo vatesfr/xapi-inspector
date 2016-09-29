@@ -49,7 +49,7 @@
     "mocha": "^3.0.2",
     "must": "^0.13.1",
     "nyc": "^8.3.0",
-    "source-map-support": "^0.4.0",
+    "source-map-support": "^0.4.3",
     "standard": "^8.1.0",
     "trace": "^2.2.0"
   },
