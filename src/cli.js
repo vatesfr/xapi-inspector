@@ -11,7 +11,7 @@ import { readFile } from 'fs-promise'
 import {
   name as pkgName,
   version as pkgVersion
-} from '../package'
+} from '../package.json'
 
 import {
   createReadableCopies,
@@ -20,8 +20,7 @@ import {
 } from './utils'
 import {
   isXmlRpcRequest,
-  parseRequest,
-  parseResponse
+  parseRequest
 } from './xml-rpc'
 
 // ===================================================================
