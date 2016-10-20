@@ -65,7 +65,7 @@ const COMMANDS = {
     })
 
     bind = {
-      certificate: await readFile(`${__dirname}/../cert.pem`),
+      cert: await readFile(`${__dirname}/../cert.pem`),
       key: await readFile(`${__dirname}/../key.pem`),
       ...splitHost(bind)
     }
