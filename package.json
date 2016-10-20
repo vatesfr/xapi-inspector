@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "app-conf": "^0.4.0",
-    "babel-runtime": "^6.3.19",
+    "babel-runtime": "^6.11.6",
     "chalk": "^1.1.1",
     "create-array": "1.0.0",
     "event-to-promise": "^0.7.0",
@@ -42,7 +42,7 @@
   "devDependencies": {
     "babel-cli": "^6.3.17",
     "babel-eslint": "^7.0.0",
-    "babel-plugin-transform-runtime": "^6.3.13",
+    "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-babili": "0.0.5",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
@@ -66,6 +66,9 @@
         ]
       }
     },
+    "plugins": [
+      "transform-runtime"
+    ],
     "presets": [
       "es2015",
       "stage-0"
