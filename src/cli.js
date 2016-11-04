@@ -156,7 +156,7 @@ execPromise(async args => {
   const [ commandName, ...commandArgs ] = restArgs
 
   if (commandName === '--') {
-    requiredArg('command')
+    throw usage
   }
 
   const command = COMMANDS[commandName]
