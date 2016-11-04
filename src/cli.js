@@ -5,6 +5,7 @@ import eventToPromise from 'event-to-promise'
 import execPromise from 'exec-promise'
 import minimist from 'minimist'
 import { create as createHttpServer } from 'http-server-plus'
+import { inspect } from 'util'
 import { load as loadConfig } from 'app-conf'
 import { readFile } from 'fs-promise'
 
@@ -96,7 +97,10 @@ const COMMANDS = {
         '[%s] %s(%s)',
         chalk.blue(req.url),
         chalk.bold.red(method),
-        params
+        inspect(params, {
+          colors: true,
+          depth: null
+        })
       )
     }
 
