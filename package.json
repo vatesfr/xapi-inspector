@@ -33,7 +33,7 @@
     "create-array": "1.0.0",
     "event-to-promise": "^0.7.0",
     "exec-promise": "^0.6.1",
-    "fs-promise": "^1.0.0",
+    "fs-promise": "^2.0.0",
     "http-server-plus": "^0.8.0",
     "minimist": "^1.2.0",
     "multi-write-stream": "^2.0.1",
