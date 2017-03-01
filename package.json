@@ -31,7 +31,7 @@
     "babel-runtime": "^6.11.6",
     "chalk": "^1.1.1",
     "create-array": "1.0.0",
-    "event-to-promise": "^0.7.0",
+    "event-to-promise": "^0.8.0",
     "exec-promise": "^0.6.1",
     "fs-promise": "^2.0.0",
     "http-server-plus": "^0.8.0",
