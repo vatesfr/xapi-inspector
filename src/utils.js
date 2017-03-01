@@ -23,17 +23,17 @@ export const fromCallback = fn => new Promise((resolve, reject) => {
 // -------------------------------------------------------------------
 
 export const proxyHttpsRequest = ({
-  headers = inputReq.headers,
+  headers,
   hostname,
-  method = inputReq.method,
-  url = inputReq.url,
+  method,
+  url,
   port
 }, inputReq) => new Promise(resolve => {
   const req = httpsRequest({
-    headers,
+    headers: headers || inputReq.headers,
     hostname,
-    method,
-    path: url,
+    method: method || inputReq.method,
+    path: url || inputReq.url,
     port,
     rejectUnauthorized: false
   }, resolve)
