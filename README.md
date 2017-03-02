@@ -1,18 +1,32 @@
-# ${pkg.name} [![Build Status](https://travis-ci.org/${pkg.shortGitHubPath}.png?branch=master)](https://travis-ci.org/${pkg.shortGitHubPath})
+# xapi-inspector [![Build Status](https://travis-ci.org/vatesfr/xapi-inspector.png?branch=master)](https://travis-ci.org/vatesfr/xapi-inspector)
 
 > ${pkg.description}
 
 ## Install
 
-Installation of the [npm package](https://npmjs.org/package/${pkg.name}):
+Installation of the [npm package](https://npmjs.org/package/xapi-inspector):
 
 ```
-> npm install --save ${pkg.name}
+> npm install --global xapi-inspector
+```
+
+Or:
+
+```
+> yarn global add xapi-inspector
 ```
 
 ## Usage
 
-**TODO**
+```
+Usage: xapi-inspector proxy [--bind <local address>] <remote address>
+
+  Create a XML-RPC proxy which forward requests from <local address>
+  to <remote address>.
+
+  <local address>:  [<hostname>]:<port>
+  <remote address>: <hostname>[:<port = 443>]
+```
 
 ## Development
 
