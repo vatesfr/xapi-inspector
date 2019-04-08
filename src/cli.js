@@ -3,10 +3,12 @@
 import chalk from "chalk";
 import eventToPromise from "event-to-promise";
 import execPromise from "exec-promise";
+import getStream from "get-stream";
 import minimist from "minimist";
 import { create as createHttpServer } from "http-server-plus";
 import { inspect } from "util";
 import { load as loadConfig } from "app-conf";
+import { parse } from "json-rpc-protocol";
 import { readFile } from "fs-promise";
 
 import { name as pkgName, version as pkgVersion } from "../package.json";
@@ -34,19 +36,6 @@ const invalidArg = (name, value) => {
 
 // ===================================================================
 
-const wrapAsync = asyncFn =>
-  async function() {
-    try {
-      return await asyncFn.apply(this, arguments);
-    } catch (error) {
-      console.error(error.stack || error);
-
-      throw error;
-    }
-  };
-
-// -------------------------------------------------------------------
-
 const COMMANDS = {
   async proxy(args) {
     let {
@@ -67,6 +56,36 @@ const COMMANDS = {
     };
 
     // ---------------------------------
+
+    const logRpcCall = (url, method, params) =>
+      console.log(
+        "[%s] %s(%s)",
+        chalk.blue(url),
+        chalk.bold.red(method),
+        inspect(params, {
+          colors: true,
+          depth: null,
+        })
+      );
+
+    const handleJsonRpcRequest = async (req, res) => {
+      const [req1, req2] = createReadableCopies(2, req);
+      const [res1] = createReadableCopies(
+        1,
+        await proxyHttpsRequest(
+          {
+            ...req,
+            ...remote,
+          },
+          req1
+        )
+      );
+      res1.pipe(res);
+
+      const { method, params } = parse(await getStream(req2));
+
+      logRpcCall(req.url, method, params);
+    };
 
     const handleRequest = async (req, res) => {
       console.log("[%s] - Not XML-RPC", chalk.blue(req.url));
@@ -89,26 +108,26 @@ const COMMANDS = {
       res1.pipe(res);
 
       const { method, params } = await parseRequest(req2);
-      console.log(
-        "[%s] %s(%s)",
-        chalk.blue(req.url),
-        chalk.bold.red(method),
-        inspect(params, {
-          colors: true,
-          depth: null,
-        })
-      );
+      logRpcCall(req.url, method, params);
     };
 
     // ---------------------------------
 
-    const server = createHttpServer(
-      wrapAsync((req, res) =>
-        isXmlRpcRequest(req)
-          ? handleXmlRpcRequest(req, res)
-          : handleRequest(req, res)
-      )
-    );
+    const server = createHttpServer(async (req, res) => {
+      try {
+        if (req.url.startsWith("/jsonrpc")) {
+          await handleJsonRpcRequest(req, res);
+        } else if (isXmlRpcRequest(req, res)) {
+          await handleXmlRpcRequest(req, res);
+        } else {
+          await handleRequest(req, res);
+        }
+      } catch (error) {
+        console.error(error.stack || error);
+
+        throw error;
+      }
+    });
 
     console.log(await server.listen(bind));
 
