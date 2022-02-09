@@ -24,18 +24,18 @@
     "dist/"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "dependencies": {
-    "app-conf": "^0.7.0",
+    "app-conf": "^1.0.0",
     "babel-runtime": "^6.23.0",
-    "chalk": "^2.4.2",
+    "chalk": "^4.1.2",
     "create-array": "1.2.0",
     "event-to-promise": "^0.8.0",
     "exec-promise": "^0.7.0",
     "fs-promise": "^2.0.0",
-    "get-stream": "^5.1.0",
-    "http-server-plus": "^0.10.0",
+    "get-stream": "^6.0.1",
+    "http-server-plus": "^0.11.0",
     "json-rpc-protocol": "^0.13.1",
     "minimist": "^1.2.0",
     "multi-write-stream": "^2.0.1",
@@ -49,10 +49,10 @@
     "eslint-config-prettier": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
-    "husky": "^3.0.5",
+    "husky": "^4.3.8",
     "lint-staged": "^9.2.5",
     "prettier": "^1.16.4"
   },
