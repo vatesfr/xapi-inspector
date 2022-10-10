@@ -20,6 +20,14 @@ import { isXmlRpcRequest, parseRequest } from "./xml-rpc";
 
 const paintArg = chalk.yellow;
 
+function pick(obj, keys) {
+  const result = {};
+  for (const key of keys) {
+    result[key] = obj[key];
+  }
+  return result;
+}
+
 const requiredArg = name => {
   const message = `Missing argument: <${paintArg(name)}>`;
 
@@ -72,7 +80,7 @@ const COMMANDS = {
       const [req1, req2] = createReadableCopies(2, req);
       const res1 = await proxyHttpsRequest(
         {
-          ...req,
+          ...pick(req, ["headers", "method", "url"]),
           ...remote,
         },
         req1
@@ -94,7 +102,7 @@ const COMMANDS = {
       const [req1, req2] = createReadableCopies(2, req);
       const res1 = await proxyHttpsRequest(
         {
-          ...req,
+          ...pick(req, ["headers", "method", "url"]),
           ...remote,
         },
         req1
