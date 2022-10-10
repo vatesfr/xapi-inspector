@@ -70,15 +70,12 @@ const COMMANDS = {
 
     const handleJsonRpcRequest = async (req, res) => {
       const [req1, req2] = createReadableCopies(2, req);
-      const [res1] = createReadableCopies(
-        1,
-        await proxyHttpsRequest(
-          {
-            ...req,
-            ...remote,
-          },
-          req1
-        )
+      const res1 = await proxyHttpsRequest(
+        {
+          ...req,
+          ...remote,
+        },
+        req1
       );
       res1.pipe(res);
 
@@ -95,15 +92,12 @@ const COMMANDS = {
 
     const handleXmlRpcRequest = async (req, res) => {
       const [req1, req2] = createReadableCopies(2, req);
-      const [res1] = createReadableCopies(
-        1,
-        await proxyHttpsRequest(
-          {
-            ...req,
-            ...remote,
-          },
-          req1
-        )
+      const res1 = await proxyHttpsRequest(
+        {
+          ...req,
+          ...remote,
+        },
+        req1
       );
       res1.pipe(res);
 
