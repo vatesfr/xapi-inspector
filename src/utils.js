@@ -1,14 +1,11 @@
 import createArray from "create-array";
-import multi from "multi-write-stream";
 import { PassThrough } from "stream";
 import { request as httpsRequest } from "https";
 
 // ===================================================================
 
 export const createReadableCopies = (n, readable) => {
-  const copies = createArray(n, () => new PassThrough());
-  readable.pipe(multi(copies));
-  return copies;
+  return createArray(n, () => readable.pipe(new PassThrough()));
 };
 
 // -------------------------------------------------------------------
