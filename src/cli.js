@@ -95,7 +95,7 @@ const COMMANDS = {
     const handleRequest = async (req, res) => {
       console.log("[%s] - Not XML-RPC", chalk.blue(req.url));
 
-      await proxyHttpsRequest(remote, req).pipe(res);
+      (await proxyHttpsRequest(remote, req)).pipe(res);
     };
 
     const handleXmlRpcRequest = async (req, res) => {
