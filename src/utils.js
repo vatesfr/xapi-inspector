@@ -21,7 +21,7 @@ export const proxyHttpsRequest = (
   { headers, hostname, method, url, port },
   inputReq
 ) =>
-  new Promise(resolve => {
+  new Promise((resolve, reject) => {
     const req = httpsRequest(
       {
         headers: headers || inputReq.headers,
@@ -32,7 +32,7 @@ export const proxyHttpsRequest = (
         rejectUnauthorized: false,
       },
       resolve
-    );
+    ).on("error", reject);
     inputReq.pipe(req);
   });
 
