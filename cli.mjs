@@ -87,6 +87,7 @@ const COMMANDS = {
         },
         req1
       );
+      res.writeHead(res1.statusCode, res1.statusMessage, res1.headers);
       res1.pipe(res);
 
       const { method, params } = parse(await getStream(req2));
@@ -109,6 +110,7 @@ const COMMANDS = {
         },
         req1
       );
+      res.writeHead(res1.statusCode, res1.statusMessage, res1.headers);
       res1.pipe(res);
 
       const { method, params } = await parseRequest(req2);
