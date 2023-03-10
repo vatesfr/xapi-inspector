@@ -2,74 +2,44 @@
   "name": "xapi-inspector",
   "version": "0.1.0",
   "license": "ISC",
-  "description": "",
-  "keywords": [],
-  "homepage": "",
-  "bugs": "",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "author": {
-    "name": "Julien Fontanet",
-    "email": "julien.fontanet@isonoe.net"
+    "name": "Vates SAS",
+    "url": "https://vates.fr"
   },
-  "preferGlobal": false,
-  "main": "dist/cli.js",
   "bin": {
-    "xapi-inspector": "dist/cli.js"
+    "xapi-inspector": "cli.mjs"
   },
-  "files": [
-    "dist/"
-  ],
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   },
   "dependencies": {
     "@xen-orchestra/self-signed": "^0.1.3",
-    "app-conf": "^1.0.0",
-    "babel-runtime": "^6.23.0",
-    "chalk": "^4.1.2",
-    "create-array": "1.2.0",
+    "app-conf": "^2.3.0",
+    "chalk": "^5.2.0",
     "event-to-promise": "^0.8.0",
     "exec-promise": "^0.7.0",
     "get-stream": "^6.0.1",
-    "http-server-plus": "^0.11.0",
+    "http-server-plus": "^1.0.0",
     "json-rpc-protocol": "^0.13.1",
     "minimist": "^1.2.0",
     "xmlrpc": "^1.3.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "eslint": "^6.3.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "husky": "^4.3.8",
-    "lint-staged": "^9.2.5",
-    "prettier": "^1.16.4"
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.4"
   },
   "scripts": {
-    "build": "NODE_ENV=production babel --source-maps --out-dir=dist/ src/",
-    "depcheck": "dependency-check ./package.json",
-    "dev": "NODE_DEV=development babel --watch --source-maps --out-dir=dist/ src/",
-    "prepublish": "npm run build"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add",
-      "eslint --ignore-pattern '!*'"
-    ]
+    "*": "prettier --ignore-unknown --write",
+    "*.{{,c,m}j,t}s{,x}": "eslint --ignore-pattern '!*'"
   }
 }

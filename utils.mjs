@@ -1,16 +1,15 @@
-import createArray from "create-array";
 import { PassThrough } from "stream";
 import { request as httpsRequest } from "https";
 
 // ===================================================================
 
 export const createReadableCopies = (n, readable) => {
-  return createArray(n, () => readable.pipe(new PassThrough()));
+  return Array.from({ length: n }, () => readable.pipe(new PassThrough()));
 };
 
 // -------------------------------------------------------------------
 
-export const fromCallback = fn =>
+export const fromCallback = (fn) =>
   new Promise((resolve, reject) => {
     fn((error, result) => (error ? reject(error) : resolve(result)));
   });
@@ -38,7 +37,7 @@ export const proxyHttpsRequest = (
 
 // -------------------------------------------------------------------
 
-const _isPort = value =>
+const _isPort = (value) =>
   typeof value === "number" &&
   value >= 0 &&
   value <= 65534 &&
@@ -47,7 +46,7 @@ const _isPort = value =>
 // splitHost('localhost:80') => { hostname: 'localhost', port: 80 }
 // splitHost('localhost') => { hostname: 'localhost' }
 // splitHost('80') => { port: 80 }
-export const splitHost = host => {
+export const splitHost = (host) => {
   host = String(host);
   const i = host.lastIndexOf(":");
 

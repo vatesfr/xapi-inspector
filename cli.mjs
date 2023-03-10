@@ -10,11 +10,14 @@ import { genSelfSignedCert } from "@xen-orchestra/self-signed";
 import { inspect } from "util";
 import { load as loadConfig } from "app-conf";
 import { parse } from "json-rpc-protocol";
+import { readFileSync } from "node:fs";
 
-import { name as pkgName, version as pkgVersion } from "../package.json";
-
-import { createReadableCopies, proxyHttpsRequest, splitHost } from "./utils";
-import { isXmlRpcRequest, parseRequest } from "./xml-rpc";
+import {
+  createReadableCopies,
+  proxyHttpsRequest,
+  splitHost,
+} from "./utils.mjs";
+import { isXmlRpcRequest, parseRequest } from "./xml-rpc.mjs";
 
 // ===================================================================
 
@@ -28,7 +31,7 @@ function pick(obj, keys) {
   return result;
 }
 
-const requiredArg = name => {
+const requiredArg = (name) => {
   const message = `Missing argument: <${paintArg(name)}>`;
 
   throw message;
@@ -138,6 +141,10 @@ const COMMANDS = {
 
 // ===================================================================
 
+const { name: pkgName, version: pkgVersion } = JSON.parse(
+  readFileSync(new URL("package.json", import.meta.url))
+);
+
 const usage = `Usage: ${pkgName} proxy [--bind <local address>] <remote address>
 
   Create a XML-RPC proxy which forward requests from <local address>
@@ -149,8 +156,12 @@ const usage = `Usage: ${pkgName} proxy [--bind <local address>] <remote address>
 ${pkgName} v${pkgVersion}
 `.replace(/<([^>]+)>/g, (_, arg) => `<${paintArg(arg)}>`);
 
-execPromise(async args => {
-  const { help = false, _: restArgs, "--": restRestArgs } = minimist(args, {
+execPromise(async (args) => {
+  const {
+    help = false,
+    _: restArgs,
+    "--": restRestArgs,
+  } = minimist(args, {
     boolean: "help",
     alias: {
       help: "h",
@@ -180,7 +191,9 @@ execPromise(async args => {
 
   return command.call(
     {
-      config: await loadConfig("xapi-inspector"),
+      config: await loadConfig("xapi-inspector", {
+        appDir: new URL(".", import.meta.url).pathname,
+      }),
     },
     commandArgs
   );

@@ -1,19 +1,23 @@
-# xapi-inspector [![Build Status](https://travis-ci.org/vatesfr/xapi-inspector.png?branch=master)](https://travis-ci.org/vatesfr/xapi-inspector)
+# xapi-inspector
 
-> ${pkg.description}
+[![Node compatibility](https://badgen.net/npm/node/xapi-inspector)](https://npmjs.org/package/xapi-inspector) [![License](https://badgen.net/npm/license/xapi-inspector)](https://npmjs.org/package/xapi-inspector) [![PackagePhobia](https://badgen.net/packagephobia/install/xapi-inspector)](https://packagephobia.now.sh/result?p=xapi-inspector)
+
+[![Package Version](https://badgen.net/npm/v/xapi-inspector)](https://npmjs.org/package/xapi-inspector) [![Latest Commit](https://badgen.net/github/last-commit/vatesfr/xapi-inspector)](https://github.com/vatesfr/xapi-inspector/commits/master)
+
+> \${pkg.description}
 
 ## Install
 
 Installation of the [npm package](https://npmjs.org/package/xapi-inspector):
 
-```
-> npm install --global xapi-inspector
+```sh
+npm install --global xapi-inspector
 ```
 
 Or:
 
-```
-> yarn global add xapi-inspector
+```sh
+yarn global add xapi-inspector
 ```
 
 ## Usage
@@ -28,28 +32,6 @@ Usage: xapi-inspector proxy [--bind <local address>] <remote address>
   <remote address>: <hostname>[:<port = 443>]
 ```
 
-## Development
-
-### Installing dependencies
-
-```
-> npm install
-```
-
-### Compilation
-
-The sources files are watched and automatically recompiled on changes.
-
-```
-> npm run dev
-```
-
-### Tests
-
-```
-> npm run test-dev
-```
-
 ## Contributions
 
 Contributions are _very_ welcomed, either on the documentation or on
@@ -57,10 +39,10 @@ the code.
 
 You may:
 
-- report any [issue](${pkg.bugs})
+- report any [issue](https://github.com/vatesfr/xapi-inspector/issues)
   you've encountered;
 - fork and create a pull request.
 
 ## License
 
-${pkg.license} © [${pkg.author.name}](${pkg.author.url})
+[ISC](https://spdx.org/licenses/ISC) © [Vates SAS](https://vates.fr)
