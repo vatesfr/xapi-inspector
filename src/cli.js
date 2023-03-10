@@ -6,10 +6,10 @@ import execPromise from "exec-promise";
 import getStream from "get-stream";
 import minimist from "minimist";
 import { create as createHttpServer } from "http-server-plus";
+import { genSelfSignedCert } from "@xen-orchestra/self-signed";
 import { inspect } from "util";
 import { load as loadConfig } from "app-conf";
 import { parse } from "json-rpc-protocol";
-import { readFile } from "fs-promise";
 
 import { name as pkgName, version as pkgVersion } from "../package.json";
 
@@ -54,8 +54,7 @@ const COMMANDS = {
     });
 
     bind = {
-      cert: await readFile(`${__dirname}/../cert.pem`),
-      key: await readFile(`${__dirname}/../key.pem`),
+      ...(await genSelfSignedCert()),
       ...splitHost(bind),
     };
     remote = {
